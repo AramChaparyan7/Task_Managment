@@ -4,6 +4,8 @@ int User::ID_ = 0;
 
 User::User() : id_{++ID_}, name_{" "}, password_{" "}, is_loged{false} {}
 
+User::User(std::string name, std::string password) : id_{++ID_}, name_{name}, password_{password}, is_loged{false} {}
+
 User::User(const User& other) : id_{++ID_}, name_{other.name_}, password_{other.password_}, is_loged{other.is_loged} {
 	int size = other.tasks_.size();
 	tasks_ = std::vector<Task*>(size);
@@ -84,6 +86,10 @@ Task* User::add_task() {
 	std::cin >> priority;
 	std::cout << "state: ";
 	std::cin >> state;
+	if(state < 0 || state > 2 || priority > 3 || priority < 0) {
+		std::cout << "wrong inputs" << std::endl;
+		return nullptr;
+	}
 	Task *newtask = new Task(id_, title, description, deadline, category, static_cast<Priority>(priority), static_cast<State>(state));
 	tasks_.push_back(newtask);
 	return newtask;
@@ -123,6 +129,10 @@ void User::edit_task(int id) {
 	std::cin >> priority;
 	std::cout << "state: ";
 	std::cin >> state;
+	if(state < 0 || state > 2 || priority > 3 || priority < 0) {
+		std::cout << "wrong inputs" << std::endl;
+		return;
+	}
 	if(tmp == nullptr){
 		std::cout << "no task found";
 		return;
@@ -132,6 +142,7 @@ void User::edit_task(int id) {
 
 void User::list_tasks() {
 	for(int i = 0; i < tasks_.size(); ++i) {
+		std::cout << std::endl;
 		tasks_[i]->displayTask();
 	}
 }
@@ -147,15 +158,6 @@ Task* User::search_tasks(std::string title) {
 
 void User::login() {
 	is_loged = true;
-//	std::string name;
-//	std::string password;
-//	std::cout << "enter name ";
-//	std::cin >> name;
-//	for(int i = 0; i< tasks_.size(); ++i) {
-	//	if(tasks_[i]- == id) {
-	//		tasks_[i].edittask();
-	//	}
-	//}
 }
 
 void User::logout() {

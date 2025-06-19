@@ -10,7 +10,7 @@ public:
 	void login();
 	void logout();
 	void add_task();
-	void delete_task();
-	void edit_task();
-	void display_task();
+	void delete_task(int);
+	void edit_task(int);
+	void display_all_tasks();
 };

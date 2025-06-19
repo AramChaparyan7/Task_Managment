@@ -46,5 +46,6 @@ public:
 	void editTask(const std::string& title, const std::string& description, const std::string& deadline, const std::string& category, Priority priority, State state);
 	void displayTask() const;
 	int get_task_id() const;
+	int get_uid() const;
 	std::string get_title() const;
 };

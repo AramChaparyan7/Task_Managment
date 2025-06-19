@@ -1,16 +1,16 @@
 #include "headers.h"
 
-int Task::ID = 0;
+int Task::ID_ = 0;
 
 Task::Task() = delete;
 
-Task::Task(int uid) : id_{++ID}, uid_{uid}, title_(""), description_(""), deadline_(""), category_(""), priority_{0} ,state_{NOT_STATED} {}
+Task::Task(int uid) : id_{++ID_}, uid_{uid}, title_(""), description_(""), deadline_(""), category_(""), priority_{0} ,state_{NOT_STATED} {}
 
-Task::Task(int uid, const std::string& title, const std::string& description, const std::string& deadline, const std::string& category, Priority priority, State) : id_{++ID}, uid_{uid}, title_{title}, description_{description}, deadline_{deadline}, category_{category}, priority_{priority}, state_{State::NOT_STATED} {}
+Task::Task(int uid, const std::string& title, const std::string& description, const std::string& deadline, const std::string& category, Priority priority, State) : id_{++ID_}, uid_{uid}, title_{title}, description_{description}, deadline_{deadline}, category_{category}, priority_{priority}, state_{State::NOT_STATED} {}
 
-Task::Task(const Task& other) :  id_{++ID}, uid_{other.uid_}, title_{other.title_}, description_{other.description_}, deadline_{other.deadline_}, category_{other.category_}, priority_{other.priority_}, state_{other.state_} {}
+Task::Task(const Task& other) :  id_{++ID_}, uid_{other.uid_}, title_{other.title_}, description_{other.description_}, deadline_{other.deadline_}, category_{other.category_}, priority_{other.priority_}, state_{other.state_} {}
 
-Task::Task(Task&& other) noexcept : id_{++ID}, uid_{uid_}, title_{std::move(other.title_)}, description_{std::move(other.description_)}, deadline_{std::move(other.deadline_)}, category_{std::move(other.category_)}, priority_{other.priority_}, state_{other.state_} {}
+Task::Task(Task&& other) noexcept : id_{++ID_}, uid_{uid_}, title_{std::move(other.title_)}, description_{std::move(other.description_)}, deadline_{std::move(other.deadline_)}, category_{std::move(other.category_)}, priority_{other.priority_}, state_{other.state_} {}
 
 
 Task& Task::operator=(const Task& other) {
@@ -27,9 +27,9 @@ Task& Task::operator=(const Task& other) {
 Task& Task::operator=(Task&& other) noexcept{
 	uid_ = other.uid_;
 	title_ = std::move(other.title_);
-	deadline_ = ostd::move(ther.deadline_);
-	description_ = ostd::move(ther.description_);
-	category_ = ostd::move(ther.category_);
+	deadline_ = std::move(other.deadline_);
+	description_ = std::move(other.description_);
+	category_ = std::move(other.category_);
 	priority_ = other.priority_;
 	state_ = other.state_;
 	return *this;
@@ -141,6 +141,10 @@ int Task::get_task_id() const{
 	return id_;
 }
 
-std::string get_title() {
+int Task::get_uid() const{
+	return uid_;
+}
+
+std::string Task::get_title() const{
 	return title_;
 }

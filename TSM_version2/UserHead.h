@@ -1,6 +1,7 @@
 #include "headers.h"
 
 class User{
+friend class TaskManager;
 private:
 	static int ID_;
 	int id_;
@@ -10,6 +11,7 @@ private:
 	bool is_loged;
 public:
 	User();
+	User(std::string name, std::string password);
 	User(const User&);
 	User(User&&) noexcept;
 	User& operator=(const User&);
