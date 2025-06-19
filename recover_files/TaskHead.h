@@ -23,7 +23,7 @@ private:
 	int state_;
 	int uid_;
 	int id_;
-	static int ID;
+	static int ID_;
 public:
 	Task();
 	Task(int uid);
@@ -46,4 +46,5 @@ public:
 	void editTask(const std::string& title, const std::string& description, const std::string& deadline, const std::string& category, Priority priority, State state);
 	void displayTask() const;
 	int get_task_id() const;
+	std::string get_title() const;
 };

@@ -12,6 +12,29 @@ Task::Task(const Task& other) :  id_{++ID}, uid_{other.uid_}, title_{other.title
 
 Task::Task(Task&& other) noexcept : id_{++ID}, uid_{uid_}, title_{std::move(other.title_)}, description_{std::move(other.description_)}, deadline_{std::move(other.deadline_)}, category_{std::move(other.category_)}, priority_{other.priority_}, state_{other.state_} {}
 
+
+Task& Task::operator=(const Task& other) {
+	uid_ = other.uid_;
+	title_ = other.title_;
+	deadline_ = other.deadline_;
+	description_ = other.description_;
+	category_ = other.category_;
+	priority_ = other.priority_;
+	state_ = other.state_;
+	return *this;
+}
+
+Task& Task::operator=(Task&& other) noexcept{
+	uid_ = other.uid_;
+	title_ = std::move(other.title_);
+	deadline_ = ostd::move(ther.deadline_);
+	description_ = ostd::move(ther.description_);
+	category_ = ostd::move(ther.category_);
+	priority_ = other.priority_;
+	state_ = other.state_;
+	return *this;
+}
+
 Task::~Task() = default;
 
 void Task::set_prio(Priority prio){
@@ -116,4 +139,8 @@ std::istream& operator>>(std::istream& is, Task& t){
 
 int Task::get_task_id() const{
 	return id_;
+}
+
+std::string get_title() {
+	return title_;
 }
