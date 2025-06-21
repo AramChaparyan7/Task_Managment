@@ -10,6 +10,7 @@ private:
 	std::vector<Task*> tasks_;
 	bool is_loged;
 public:
+	FRIEND_TEST(Task_Manager, makeUser);
 	User();
 	User(std::string name, std::string password);
 	User(const User&);

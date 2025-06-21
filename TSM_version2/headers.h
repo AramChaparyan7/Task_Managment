@@ -2,6 +2,7 @@
 #define HEADER
 
 #include <utility>
+#include <gtest/gtest.h>
 #include <iostream>
 #include <vector>
 #include <string> 

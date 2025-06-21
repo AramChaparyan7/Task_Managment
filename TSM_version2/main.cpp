@@ -1,6 +1,7 @@
 #include "headers.h"
+#include <gtest/gtest.h>
 
-int main() {
+int main(int argv, char** argc) {
 	char c=0;
 	TaskManager TSM;
 	while(c != 'q') {
@@ -28,24 +29,45 @@ int main() {
 				TSM.add_task();
 				break;
 			case '5':
-				{
-				int id = 0;
-				std::cout << "enter task id: ";
-				std::cin >> id;
-				TSM.delete_task(id);
+				TSM.delete_task();
 				break;
-				}
 			case '6':
-				{
-				int id = 0;
-				std::cout << "enter task id: ";
-				std::cin >> id;
-				TSM.edit_task(id);
+				TSM.edit_task();
 				break;
-				}
 			case '7':
 				TSM.display_all_tasks();
+				break;
 		}
 	}
-	return 0;
+	::testing::InitGoogleTest(&argv, argc);
+	return RUN_ALL_TESTS();
+}
+
+TEST(Task_Manager, makeUser) {
+	User u("name", "password");
+	EXPECT_EQ(u.name_,"name");	
+	EXPECT_EQ(u.password_, "password");	
+	EXPECT_EQ(u.is_loged, false);
+	User u1(u);
+	EXPECT_EQ(u1.name_, "name");	
+	User u2;
+	u2 = u;
+	EXPECT_EQ(u2.name_, "name");	
+}
+
+TEST(tasktest, task_functions) {
+	Task t(1, "title", "description" , "deadline", "category", static_cast<Priority>(1), static_cast<State>(1));
+	EXPECT_EQ(t.uid_, 1);
+	EXPECT_EQ(t.title_, "title");
+	EXPECT_EQ(t.description_, "description");
+	EXPECT_EQ(t.category_, "category");
+	EXPECT_EQ(t.deadline_, "deadline");
+	EXPECT_EQ(t.state_, State::IN_PROGRESS);
+	EXPECT_EQ(t.priority_, Priority::MEDIUM);
+}
+
+TEST(Task_Manager, TaskManagerTest) {
+	TaskManager tsm;
+	EXPECT_EQ(tsm.Users_.size(), 0);
+	EXPECT_EQ(tsm.Tasks_.size(), 0);
 }

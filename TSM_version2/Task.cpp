@@ -6,7 +6,7 @@ Task::Task() = delete;
 
 Task::Task(int uid) : id_{++ID_}, uid_{uid}, title_(""), description_(""), deadline_(""), category_(""), priority_{0} ,state_{NOT_STATED} {}
 
-Task::Task(int uid, const std::string& title, const std::string& description, const std::string& deadline, const std::string& category, Priority priority, State) : id_{++ID_}, uid_{uid}, title_{title}, description_{description}, deadline_{deadline}, category_{category}, priority_{priority}, state_{State::NOT_STATED} {}
+Task::Task(int uid, const std::string& title, const std::string& description, const std::string& deadline, const std::string& category, Priority priority, State state) : id_{++ID_}, uid_{uid}, title_{title}, description_{description}, deadline_{deadline}, category_{category}, priority_{priority}, state_{state} {}
 
 Task::Task(const Task& other) :  id_{++ID_}, uid_{other.uid_}, title_{other.title_}, description_{other.description_}, deadline_{other.deadline_}, category_{other.category_}, priority_{other.priority_}, state_{other.state_} {}
 

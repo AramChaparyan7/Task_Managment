@@ -25,6 +25,7 @@ private:
 	int id_;
 	static int ID_;
 public:
+	FRIEND_TEST(tasktest, task_functions);
 	Task();
 	Task(int uid);
 	Task(int uid, const std::string& title, const std::string& description, const std::string& deadline, const std::string& category, Priority priority, State state);
